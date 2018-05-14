@@ -34,7 +34,7 @@ public class ResultsTable extends JFrame {
 	/** Scroll for forward paths table */
 	JScrollPane forwardPathScroll;
 	/** Headers for forward paths table */
-	String forwardPathHeaders[] = { "No", "Forward Paths", "Gain" };
+	String forwardPathHeaders[] = { "No", "Forward Paths", "Gain" , "Delta" };
 	/** Table for loops */
 	JTable loopsTable = new JTable();
 	/** Table model for loops */
@@ -55,9 +55,13 @@ public class ResultsTable extends JFrame {
 	private Box theTablesBox = Box.createHorizontalBox();
 	/** Box to add mason formula result to the middle table */
 	private Box masonFormulaBox = Box.createVerticalBox();
+	/** delta for each forward path */
+	ArrayList<Double> forwardPathDelta;
+	
+	
 
 	/** sets the table features and data */
-	public ResultsTable(ArrayList<ArrayList<Integer>> nonTouching, ArrayList<ArrayList<Integer>> forward,
+	public ResultsTable(ArrayList<Double> pathDelta, double deltaValue ,ArrayList<ArrayList<Integer>> nonTouching, ArrayList<ArrayList<Integer>> forward,
 			ArrayList<ArrayList<Integer>> loops, ArrayList<Integer> nonGains, ArrayList<Integer> forwardGain,
 			ArrayList<Integer> loopGain, String MasonResult) {
 		allNonTouchingLoops = nonTouching;
@@ -66,8 +70,11 @@ public class ResultsTable extends JFrame {
 		nonTouchingLoopsGain = nonGains;
 		forwardGains = forwardGain;
 		loopGains = loopGain;
+		forwardPathDelta = pathDelta;
 		JLabel label1 = new JLabel("Mason formula gain : " + MasonResult);
+		JLabel label2 = new JLabel("Delta : " + deltaValue);
 		label1.setFont(new Font("Serif", Font.PLAIN, 30));
+		label2.setFont(new Font("Serif", Font.PLAIN, 30));
 		forwardPathModel.setColumnIdentifiers(forwardPathHeaders);
 		forwardPathTable.setModel(forwardPathModel);
 		loopsModel.setColumnIdentifiers(loopsHeaders);
@@ -80,12 +87,13 @@ public class ResultsTable extends JFrame {
 		insert();
 		theTablesBox.add(forwardPathScroll);
 		masonFormulaBox.add(loopsScroll);
+		masonFormulaBox.add(label2);
 		masonFormulaBox.add(label1);
 		theTablesBox.add(masonFormulaBox);
 		theTablesBox.add(nonTouchingLoopsScroll);
 		add(theTablesBox, BorderLayout.NORTH);
 		this.setTitle("Results");
-		setSize(1300, 520);
+		setSize(1300, 570);
 		setVisible(true);
 	}
 
@@ -109,7 +117,7 @@ public class ResultsTable extends JFrame {
 		}
 		for (int i = 0; i < allForwardPaths.size(); i++) {
 			forwardPathModel.addRow(new Object[] { String.valueOf(i), String.valueOf(allForwardPaths.get(i)),
-					String.valueOf(forwardGains.get(i)) });
+					String.valueOf(forwardGains.get(i)) , String.valueOf(forwardPathDelta.get(i)) });
 
 		}
 

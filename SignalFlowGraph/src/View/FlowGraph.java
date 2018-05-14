@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import Control.Control;
 
 /** @author EshraqIbrahim */
-public class GUI {
+public class FlowGraph {
 	/** Frame used */
 	private JFrame frame = new JFrame();
 	/** Panel that contains the drawing area */
@@ -30,7 +30,7 @@ public class GUI {
 	 */
 	public static JButton calculateButton;
 
-	public GUI() {
+	public FlowGraph() {
 		initialize();
 	}
 
@@ -72,7 +72,7 @@ public class GUI {
 			@Override
 			public void run() {
 				try {
-					GUI window = new GUI();
+					FlowGraph window = new FlowGraph();
 					window.frame.setVisible(true);
 
 				} catch (Exception e) {

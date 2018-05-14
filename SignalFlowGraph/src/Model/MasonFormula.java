@@ -29,6 +29,8 @@ public class MasonFormula {
 	IndividualLoops loops;
 	/** object of forward paths */
 	ForwardPaths forwardPaths;
+	/** delta of over all function */
+	double delta;
 
 	/**
 	 * initialize and set every thing needed to calculate mason formula
@@ -50,7 +52,7 @@ public class MasonFormula {
 		pathDelta = new ArrayList<Double>();
 		calculatePathDelta();
 		String result = calculateMasonFormula();
-		new ResultsTable(allNonTouchingLoops, allForwardPaths, allLoops, nonTouchingLoopsGain, forwardGains, loopGains,
+		new ResultsTable(pathDelta,delta,allNonTouchingLoops, allForwardPaths, allLoops, nonTouchingLoopsGain, forwardGains, loopGains,
 				result);
 
 	}
@@ -126,7 +128,7 @@ public class MasonFormula {
 		for (int i = 0; i < forwardGains.size(); i++) {
 			overAllTransfer += (forwardGains.get(i) * pathDelta.get(i));
 		}
-		double delta = calculateDelta(loopGains, allNonTouchingLoops, nonTouchingLoopsGain);
+		delta = calculateDelta(loopGains, allNonTouchingLoops, nonTouchingLoopsGain);
 		overAllTransfer = overAllTransfer / delta;
 		return Double.toString(overAllTransfer);
 

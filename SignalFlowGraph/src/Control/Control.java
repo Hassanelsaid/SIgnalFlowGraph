@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import Model.Branch;
 import Model.MasonFormula;
 import Model.Node;
-import View.GUI;
+import View.FlowGraph;
 
 /** @author EshraqIbrahim */
 
@@ -146,7 +146,7 @@ public class Control extends JPanel {
 
 	/** do Actions of buttons in the GUI */
 	public void doActions() {
-		GUI.nodeButton.addActionListener(new ActionListener() {
+		FlowGraph.nodeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				size = 0;
@@ -168,7 +168,7 @@ public class Control extends JPanel {
 			}
 		});
 
-		GUI.edgeButton.addActionListener(new ActionListener() {
+		FlowGraph.edgeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -205,7 +205,7 @@ public class Control extends JPanel {
 			}
 		});
 
-		GUI.calculateButton.addActionListener(new ActionListener() {
+		FlowGraph.calculateButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new MasonFormula(graphNodes);
