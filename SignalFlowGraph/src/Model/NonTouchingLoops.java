@@ -7,28 +7,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
-/** @author EshraqIbrahim */
 public class NonTouchingLoops {
-	/** ArrayList contains all loops */
 	private ArrayList<ArrayList<Integer>> allLoops;
-	/** ArrayList contains the loops gain */
 	private ArrayList<Integer> allLoopsGain;
-	/** Headers for non touching loops */
 	private ArrayList<ArrayList<Integer>> nonTouchingLoops;
-	/** ArrayList contains non touching loops indexes */
 	private ArrayList<ArrayList<Integer>> nonTouchingLoopsIndex;
-	/** ArrayList contains non touching loops gain */
 	private ArrayList<Integer> nonTouchingLoopsGain;
-
-	/**
-	 * initialize arrayList and set loops and loops gains
-	 * 
-	 * @param loops
-	 *            get list of loops
-	 * @param loopGains
-	 *            get list of loops gain
-	 * 
-	 */
 	public NonTouchingLoops(ArrayList<ArrayList<Integer>> loops, ArrayList<Integer> loopGains) {
 		allLoops = loops;
 		allLoopsGain = loopGains;
@@ -36,13 +20,6 @@ public class NonTouchingLoops {
 		nonTouchingLoopsIndex = new ArrayList<ArrayList<Integer>>();
 		nonTouchingLoops = new ArrayList<ArrayList<Integer>>();
 	}
-
-	/**
-	 * Get the non touching loops
-	 * 
-	 * @return ArrayList contains ArrayLists of indexes of non touching loops
-	 * 
-	 */
 	public ArrayList<ArrayList<Integer>> getNonTouchingLoops() {
 		int flag = 0;
 		Queue<ArrayList<Integer>> myQueue = new LinkedList<ArrayList<Integer>>();
@@ -104,8 +81,6 @@ public class NonTouchingLoops {
 		calculateGain();
 		return nonTouchingLoopsIndex;
 	}
-
-	/** Calculate non touching loops gain */
 	private void calculateGain() {
 		for (int i = 0; i < nonTouchingLoopsIndex.size(); i++) {
 			int gain = 1;
@@ -115,13 +90,6 @@ public class NonTouchingLoops {
 			nonTouchingLoopsGain.add(gain);
 		}
 	}
-
-	/**
-	 * Getter for nonTouchingLoopsGain
-	 * 
-	 * @return nonTouchingLoopsGain
-	 * 
-	 */
 	public ArrayList<Integer> getNontouchingGains() {
 		return nonTouchingLoopsGain;
 	}

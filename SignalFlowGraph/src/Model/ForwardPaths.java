@@ -1,26 +1,11 @@
 package Model;
 
 import java.util.ArrayList;
-
-/** @author RowanAdel */
 public class ForwardPaths {
-	/** all forward paths */
-	private ArrayList<ArrayList<Integer>> forwardPaths = new ArrayList<>();
-	/** all forward paths gains */
-	private ArrayList<Integer> forwardGains = new ArrayList<>();
-	/** to calculate forward path */
-	private ArrayList<Integer> forwardPath = new ArrayList<>();
-	/** all nodes */
 	private ArrayList<Node> nodes;
-	/** value of path gain */
+	private ArrayList<ArrayList<Integer>> forwardPaths = new ArrayList<>();
 	private int pathGain = 1;
-
-	/**
-	 * initialize every thing needed and set nodes
-	 * 
-	 * @param nodes
-	 *            all nodes
-	 */
+	private ArrayList<Integer> forwardGains = new ArrayList<>(),forwardPath = new ArrayList<>();
 	public ForwardPaths(ArrayList<Node> nodes) {
 		Node lastNode = nodes.get(nodes.size() - 1);
 		if (lastNode.getOutBranches().size() != 0) {
@@ -32,33 +17,13 @@ public class ForwardPaths {
 		}
 		this.nodes = nodes;
 	}
-
-	/**
-	 * getter for forwardGains
-	 * 
-	 * @return forwardGains
-	 * 
-	 */
 	public ArrayList<Integer> getForwardGains() {
 		return forwardGains;
 	}
-
-	/**
-	 * getter for forward paths
-	 * 
-	 * @return forwardPaths
-	 */
 	public ArrayList<ArrayList<Integer>> getForwardPaths() {
 		getPath(nodes.get(0));
 		return forwardPaths;
 	}
-
-	/**
-	 * get the forward path
-	 * 
-	 * @param node
-	 *            starting node
-	 */
 	public void getPath(Node node) {
 		ArrayList<Branch> nodeOutBranches = node.getOutBranches();
 		forwardPath.add(node.getNumber());

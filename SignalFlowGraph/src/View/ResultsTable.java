@@ -10,57 +10,32 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/** @author EshraqIbrahim */
 public class ResultsTable extends JFrame {
 
-	/** serial version UID */
 	private static final long serialVersionUID = 1L;
-	/** ArrayList contains the non touching loops indexes */
 	ArrayList<ArrayList<Integer>> allNonTouchingLoops;
-	/** ArrayList contains the forward paths nodes */
 	ArrayList<ArrayList<Integer>> allForwardPaths;
-	/** ArrayList contains the loops nodes */
 	ArrayList<ArrayList<Integer>> allLoops;
-	/** ArrayList contains the non touching loops gains */
 	ArrayList<Integer> nonTouchingLoopsGain;
-	/** ArrayList contains the forward paths gains */
 	ArrayList<Integer> forwardGains;
-	/** ArrayList contains the loops gains */
 	ArrayList<Integer> loopGains;
-	/** Table for forward paths */
 	JTable forwardPathTable = new JTable();
-	/** Table model for forward paths */
 	DefaultTableModel forwardPathModel = new DefaultTableModel();
-	/** Scroll for forward paths table */
 	JScrollPane forwardPathScroll;
-	/** Headers for forward paths table */
-	String forwardPathHeaders[] = { "No", "Forward Paths", "Gain" , "Delta" };
-	/** Table for loops */
+	String forwardPathHeaders[] = { "Number", "Forward Path", "Gain" , "Delta" };
 	JTable loopsTable = new JTable();
-	/** Table model for loops */
 	DefaultTableModel loopsModel = new DefaultTableModel();
-	/** Scroll for loops table */
 	JScrollPane loopsScroll;
-	/** Headers for loops table */
-	String loopsHeaders[] = { "No", "Loops", "Gain" };
-	/** Table for non touching loops indexes */
+	String loopsHeaders[] = { "Number", "Loop", "Gain" };
 	JTable nonTouchingLoopsTable = new JTable();
-	/** Table model for non touching loops paths */
 	DefaultTableModel nonTouchingLoopsModel = new DefaultTableModel();
-	/** Scroll for non touching loops table */
 	JScrollPane nonTouchingLoopsScroll;
-	/** Headers for non touching loops table */
-	String nonTouchingLoopsHeaders[] = { "No", "NonTounching Loops", "Gain" };
-	/** Box containing all tables */
+	String nonTouchingLoopsHeaders[] = { "Number", "NonTounching Loop", "Gain" };
 	private Box theTablesBox = Box.createHorizontalBox();
-	/** Box to add mason formula result to the middle table */
 	private Box masonFormulaBox = Box.createVerticalBox();
-	/** delta for each forward path */
+	private Box theOverallGainBox = Box.createVerticalBox();
 	ArrayList<Double> forwardPathDelta;
-	
-	
 
-	/** sets the table features and data */
 	public ResultsTable(ArrayList<Double> pathDelta, double deltaValue ,ArrayList<ArrayList<Integer>> nonTouching, ArrayList<ArrayList<Integer>> forward,
 			ArrayList<ArrayList<Integer>> loops, ArrayList<Integer> nonGains, ArrayList<Integer> forwardGain,
 			ArrayList<Integer> loopGain, String MasonResult) {
@@ -71,8 +46,11 @@ public class ResultsTable extends JFrame {
 		forwardGains = forwardGain;
 		loopGains = loopGain;
 		forwardPathDelta = pathDelta;
-		JLabel label1 = new JLabel("Mason formula gain : " + MasonResult);
-		JLabel label2 = new JLabel("Delta : " + deltaValue);
+		JLabel label1 = new JLabel(MasonResult);
+		JLabel label2 = new JLabel("Overall gain : " );
+		JLabel label3 = new JLabel("Forward paths : " );
+		JLabel label4 = new JLabel("Loops : " );
+		JLabel label5 = new JLabel("Nontouching loops : " );
 		label1.setFont(new Font("Serif", Font.PLAIN, 30));
 		label2.setFont(new Font("Serif", Font.PLAIN, 30));
 		forwardPathModel.setColumnIdentifiers(forwardPathHeaders);
@@ -85,22 +63,22 @@ public class ResultsTable extends JFrame {
 		loopsScroll = new JScrollPane(loopsTable);
 		nonTouchingLoopsScroll = new JScrollPane(nonTouchingLoopsTable);
 		insert();
+		theTablesBox.add(label3);
 		theTablesBox.add(forwardPathScroll);
+		masonFormulaBox.add(label4);
 		masonFormulaBox.add(loopsScroll);
-		masonFormulaBox.add(label2);
-		masonFormulaBox.add(label1);
+		masonFormulaBox.add(label5);
+		masonFormulaBox.add(nonTouchingLoopsScroll);
 		theTablesBox.add(masonFormulaBox);
-		theTablesBox.add(nonTouchingLoopsScroll);
+		theOverallGainBox.add(label2);
+		theOverallGainBox.add(label1);
+		theTablesBox.add(theOverallGainBox);
 		add(theTablesBox, BorderLayout.NORTH);
-		this.setTitle("Results");
+		this.setTitle("Transfer Function");
 		setSize(1300, 570);
 		setVisible(true);
 	}
 
-	/**
-	 * insert data in rows in forward paths table , loops table , non touching loops
-	 * table
-	 */
 	public void insert() {
 		ArrayList<Integer> ar = new ArrayList<Integer>();
 		ar.add(1);

@@ -2,45 +2,18 @@ package Model;
 
 import java.util.ArrayList;
 
-/** @author RowanAdel */
 public class IndividualLoops {
-	/** all]loops indexes */
-	private ArrayList<ArrayList<Integer>> loops = new ArrayList<>();
-	/** all loops gain */
-	private ArrayList<Integer> loopGains = new ArrayList<>();
-	/** to add loop */
-	private ArrayList<Integer> loop = new ArrayList<>();
-	/** all nodes */
 	private ArrayList<Node> nodes;
-	/** check if visited */
-	private ArrayList<Integer> visited = new ArrayList<>();
-	/** loop gain */
+	private ArrayList<ArrayList<Integer>> loops = new ArrayList<>();
 	private int loopGain = 1;
-
-	/**
-	 * set nodes
-	 * 
-	 * @param nodes
-	 *            all nodes
-	 */
+	private ArrayList<Integer> loopGains = new ArrayList<>(),loop = new ArrayList<>();
+	private ArrayList<Integer> visited = new ArrayList<>();
 	public IndividualLoops(ArrayList<Node> nodes) {
 		this.nodes = nodes;
 	}
-
-	/**
-	 * getter for loopGains
-	 * 
-	 * @return loopGains
-	 */
 	public ArrayList<Integer> getAllLoopGains() {
 		return loopGains;
 	}
-
-	/**
-	 * get loops
-	 * 
-	 * @return loops
-	 */
 	public ArrayList<ArrayList<Integer>> getLoops() {
 		for (int i = 0; i < nodes.size(); i++) {
 			Node node = nodes.get(i);
@@ -68,15 +41,6 @@ public class IndividualLoops {
 		}
 		return loops;
 	}
-
-	/**
-	 * get loop path
-	 * 
-	 * @param node
-	 *            node to check loop
-	 * @param out
-	 *            out node
-	 */
 	public void getLoopPath(Node node, Node out) {
 		loop.add(out.getNumber());
 		ArrayList<Branch> branches = out.getOutBranches();
